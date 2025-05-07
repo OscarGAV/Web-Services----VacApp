@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VacApp-Bovinova-Platform", "VacApp-Bovinova-Platform\VacApp-Bovinova-Platform.csproj", "{6F42E189-DC10-4EFC-B8DF-9AC7F3832BF0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6F42E189-DC10-4EFC-B8DF-9AC7F3832BF0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F42E189-DC10-4EFC-B8DF-9AC7F3832BF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F42E189-DC10-4EFC-B8DF-9AC7F3832BF0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F42E189-DC10-4EFC-B8DF-9AC7F3832BF0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

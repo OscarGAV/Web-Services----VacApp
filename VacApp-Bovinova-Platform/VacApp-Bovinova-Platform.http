@@ -1,0 +1,6 @@
+@VacApp_Bovinova_Platform_HostAddress = http://localhost:5160
+
+GET {{VacApp_Bovinova_Platform_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
