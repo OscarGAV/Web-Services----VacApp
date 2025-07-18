@@ -46,6 +46,27 @@ export interface UserProfile {
   emailConfirmed: boolean;
 }
 
+export interface Bovine {
+  id: number;
+  name: string;
+  gender: string;
+  birthDate: string;
+  breed: string;
+  location: string;
+  bovineImg: string;
+  stableId: number;
+}
+
+export interface CreateBovineRequest {
+  name: string;
+  gender: string;
+  birthDate: string;
+  breed: string;
+  location: string;
+  bovineImg?: File;
+  stableId: number;
+}
+
 export const authApi = {
   signUp: async (data: SignUpRequest): Promise<AuthResponse> => {
     const response = await api.post('/user/sign-up', data);
@@ -59,6 +80,34 @@ export const authApi = {
 
   getProfile: async (): Promise<UserProfile> => {
     const response = await api.get('/user/profile');
+    return response.data;
+  },
+};
+
+export const bovinesApi = {
+  getAllBovines: async (): Promise<Bovine[]> => {
+    const response = await api.get('/bovines');
+    return response.data;
+  },
+
+  createBovine: async (data: CreateBovineRequest): Promise<Bovine> => {
+    const formData = new FormData();
+    formData.append('Name', data.name);
+    formData.append('Gender', data.gender);
+    formData.append('BirthDate', data.birthDate);
+    formData.append('Breed', data.breed);
+    formData.append('Location', data.location);
+    formData.append('StableId', data.stableId.toString());
+    
+    if (data.bovineImg) {
+      formData.append('BovineImg', data.bovineImg);
+    }
+
+    const response = await api.post('/bovines', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
     return response.data;
   },
 };

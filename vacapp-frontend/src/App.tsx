@@ -1,9 +1,11 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
-import LoginSimple from './pages/LoginSimple';
+import Login from './pages/Login';
 import Register from './pages/Register';
 import Home from './pages/Home';
+import Bovines from './pages/Bovines';
+import AddBovine from './pages/AddBovine';
 import './App.css';
 
 function App() {
@@ -12,13 +14,29 @@ function App() {
       <Router>
         <div className="App">
           <Routes>
-            <Route path="/login" element={<LoginSimple />} />
+            <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route 
               path="/home" 
               element={
                 <ProtectedRoute>
                   <Home />
+                </ProtectedRoute>
+              } 
+            />
+            <Route 
+              path="/bovines" 
+              element={
+                <ProtectedRoute>
+                  <Bovines />
+                </ProtectedRoute>
+              } 
+            />
+            <Route 
+              path="/bovines/add" 
+              element={
+                <ProtectedRoute>
+                  <AddBovine />
                 </ProtectedRoute>
               } 
             />
