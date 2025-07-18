@@ -20,8 +20,7 @@ const EditBovine: React.FC = () => {
     birthDate: '',
     breed: '',
     location: '',
-    stableId: 0,
-    bovineImg: undefined
+    stableId: 0
   });
 
   useEffect(() => {
@@ -46,8 +45,7 @@ const EditBovine: React.FC = () => {
           birthDate: bovineData.birthDate.split('T')[0], // Format for date input
           breed: bovineData.breed,
           location: bovineData.location,
-          stableId: bovineData.stableId,
-          bovineImg: undefined
+          stableId: bovineData.stableId
         });
       } catch (error: any) {
         setError(error.response?.data?.message || 'Failed to fetch bovine details');
@@ -91,13 +89,7 @@ const EditBovine: React.FC = () => {
     }));
   };
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    setFormData(prev => ({
-      ...prev,
-      bovineImg: file
-    }));
-  };
+
 
   const handleLogout = () => {
     logout();
@@ -316,22 +308,7 @@ const EditBovine: React.FC = () => {
               </div>
             </div>
 
-            <div>
-              <label htmlFor="bovineImg" className="block text-sm font-medium text-gray-700 mb-2">
-                Update Image (Optional)
-              </label>
-              <input
-                type="file"
-                id="bovineImg"
-                name="bovineImg"
-                onChange={handleFileChange}
-                accept="image/*"
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent bg-white/50 backdrop-blur-sm"
-              />
-              <p className="text-sm text-gray-500 mt-1">
-                Leave empty to keep current image. Supported formats: JPG, PNG, GIF
-              </p>
-            </div>
+
 
             <div className="flex justify-end space-x-4">
               <button

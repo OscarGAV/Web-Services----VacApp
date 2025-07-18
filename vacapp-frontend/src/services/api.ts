@@ -73,7 +73,6 @@ export interface UpdateBovineRequest {
   birthDate: string;
   breed: string;
   location: string;
-  bovineImg?: File;
   stableId: number;
 }
 
@@ -142,22 +141,13 @@ export const bovinesApi = {
   },
 
   updateBovine: async (id: number, data: UpdateBovineRequest): Promise<Bovine> => {
-    const formData = new FormData();
-    formData.append('Name', data.name);
-    formData.append('Gender', data.gender);
-    formData.append('BirthDate', data.birthDate);
-    formData.append('Breed', data.breed);
-    formData.append('Location', data.location);
-    formData.append('StableId', data.stableId.toString());
-    
-    if (data.bovineImg) {
-      formData.append('FileData', data.bovineImg);
-    }
-
-    const response = await api.put(`/bovines/${id}`, formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
+    const response = await api.put(`/bovines/${id}`, {
+      Name: data.name,
+      Gender: data.gender,
+      BirthDate: data.birthDate,
+      Breed: data.breed,
+      Location: data.location,
+      StableId: data.stableId
     });
     return response.data;
   },

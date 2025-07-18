@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { authApi, UpdateProfileRequest } from '../services/api';
+import { authApi } from '../services/api';
+import type { UpdateProfileRequest } from '../services/api';
 
 const Settings: React.FC = () => {
   const { user, logout, updateUser } = useAuth();
