@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { bovinesApi, UpdateBovineRequest } from '../services/api';
-import type { Bovine } from '../services/api';
+import { bovinesApi } from '../services/api';
+import type { Bovine, UpdateBovineRequest } from '../services/api';
 
 const EditBovine: React.FC = () => {
   const { id } = useParams<{ id: string }>();
