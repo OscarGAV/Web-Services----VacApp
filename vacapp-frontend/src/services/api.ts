@@ -67,6 +67,11 @@ export interface CreateBovineRequest {
   stableId: number;
 }
 
+export interface UpdateProfileRequest {
+  username: string;
+  email: string;
+}
+
 export const authApi = {
   signUp: async (data: SignUpRequest): Promise<AuthResponse> => {
     const response = await api.post('/user/sign-up', data);
@@ -80,6 +85,16 @@ export const authApi = {
 
   getProfile: async (): Promise<UserProfile> => {
     const response = await api.get('/user/profile');
+    return response.data;
+  },
+
+  updateProfile: async (data: UpdateProfileRequest): Promise<void> => {
+    const response = await api.put('/user/update-profile', data);
+    return response.data;
+  },
+
+  deleteAccount: async (): Promise<void> => {
+    const response = await api.delete('/user/delete-account');
     return response.data;
   },
 };

@@ -8,6 +8,7 @@ interface AuthContextType {
   token: string | null;
   login: (userData: AuthResponse) => void;
   logout: () => void;
+  updateUser: (userData: UserProfile) => void;
   isLoading: boolean;
 }
 
@@ -66,11 +67,16 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     localStorage.removeItem('token');
   };
 
+  const updateUser = (userData: UserProfile) => {
+    setUser(userData);
+  };
+
   const value = {
     user,
     token,
     login,
     logout,
+    updateUser,
     isLoading,
   };
 

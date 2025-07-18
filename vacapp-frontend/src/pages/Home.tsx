@@ -15,6 +15,10 @@ const Home: React.FC = () => {
     navigate('/bovines');
   };
 
+  const handleNavigateToSettings = () => {
+    navigate('/settings');
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100">
       {/* Navigation */}
@@ -155,7 +159,10 @@ const Home: React.FC = () => {
             <p className="text-gray-600 mb-4">
               Configure your account settings, privacy preferences, and notification options.
             </p>
-            <button className="w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white py-2 px-4 rounded-lg font-medium transition duration-200">
+            <button 
+              onClick={handleNavigateToSettings}
+              className="w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white py-2 px-4 rounded-lg font-medium transition duration-200"
+            >
               Open Settings
             </button>
           </div>
