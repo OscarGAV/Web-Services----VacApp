@@ -10,6 +10,9 @@ const BovineDetails: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string>('');
   const [imageError, setImageError] = useState(false);
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+  const [deleteConfirmText, setDeleteConfirmText] = useState('');
+  const [isDeleting, setIsDeleting] = useState(false);
   const { user, logout } = useAuth();
   const navigate = useNavigate();
 
@@ -68,6 +71,30 @@ const BovineDetails: React.FC = () => {
 
   const handleImageError = () => {
     setImageError(true);
+  };
+
+  const handleEditBovine = () => {
+    if (bovine) {
+      navigate(`/bovines/${bovine.id}/edit`);
+    }
+  };
+
+  const handleDeleteBovine = async () => {
+    if (!bovine || deleteConfirmText !== 'DELETE') {
+      setError('Please type DELETE to confirm deletion');
+      return;
+    }
+
+    setIsDeleting(true);
+    setError('');
+
+    try {
+      await bovinesApi.deleteBovine(bovine.id);
+      navigate('/bovines');
+    } catch (error: any) {
+      setError(error.response?.data?.message || 'Failed to delete bovine');
+      setIsDeleting(false);
+    }
   };
 
   if (isLoading) {
@@ -272,16 +299,100 @@ const BovineDetails: React.FC = () => {
                 Actions
               </h2>
               
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <button 
-                  onClick={handleBackToBovines}
-                  className="bg-gradient-to-r from-gray-500 to-gray-600 hover:from-gray-600 hover:to-gray-700 text-white py-3 px-6 rounded-xl font-semibold transition duration-200 transform hover:scale-105 shadow-lg"
-                >
-                  Back to List
-                </button>
-                <button className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white py-3 px-6 rounded-xl font-semibold transition duration-200 transform hover:scale-105 shadow-lg">
-                  Edit Bovine
-                </button>
+              <div className="space-y-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <button 
+                    onClick={handleBackToBovines}
+                    className="bg-gradient-to-r from-gray-500 to-gray-600 hover:from-gray-600 hover:to-gray-700 text-white py-3 px-6 rounded-xl font-semibold transition duration-200 transform hover:scale-105 shadow-lg"
+                  >
+                    Back to List
+                  </button>
+                  <button 
+                    onClick={handleEditBovine}
+                    className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white py-3 px-6 rounded-xl font-semibold transition duration-200 transform hover:scale-105 shadow-lg"
+                  >
+                    Edit Bovine
+                  </button>
+                </div>
+
+                {/* Delete Section */}
+                <div className="border-t border-gray-200 pt-4">
+                  <h3 className="text-lg font-semibold text-red-900 mb-3 flex items-center">
+                    <svg className="h-5 w-5 text-red-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z" />
+                    </svg>
+                    Danger Zone
+                  </h3>
+                  
+                  {!showDeleteConfirm ? (
+                    <button
+                      onClick={() => setShowDeleteConfirm(true)}
+                      className="bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white py-3 px-6 rounded-xl font-semibold transition duration-200 transform hover:scale-105 shadow-lg"
+                    >
+                      Delete Bovine
+                    </button>
+                  ) : (
+                    <div className="space-y-4">
+                      <div className="bg-red-50 border border-red-200 rounded-lg p-4">
+                        <div className="flex items-start">
+                          <svg className="h-5 w-5 text-red-600 mr-2 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z" />
+                          </svg>
+                          <div>
+                            <h4 className="text-red-800 font-medium">Are you absolutely sure?</h4>
+                            <p className="text-red-700 text-sm mt-1">
+                              This action cannot be undone. This will permanently delete <strong>{bovine.name}</strong> and remove all associated data.
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div>
+                        <label htmlFor="deleteConfirm" className="block text-sm font-medium text-gray-700 mb-2">
+                          Type <span className="font-bold text-red-600">DELETE</span> to confirm:
+                        </label>
+                        <input
+                          type="text"
+                          id="deleteConfirm"
+                          value={deleteConfirmText}
+                          onChange={(e) => setDeleteConfirmText(e.target.value)}
+                          className="w-full px-4 py-3 border border-red-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent bg-white/50 backdrop-blur-sm"
+                          placeholder="Type DELETE to confirm"
+                        />
+                      </div>
+
+                      <div className="flex space-x-3">
+                        <button
+                          onClick={handleDeleteBovine}
+                          disabled={isDeleting || deleteConfirmText !== 'DELETE'}
+                          className="bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white px-6 py-3 rounded-lg font-medium transition duration-200 transform hover:scale-105 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+                        >
+                          {isDeleting ? (
+                            <div className="flex items-center">
+                              <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" fill="none" viewBox="0 0 24 24">
+                                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                              </svg>
+                              Deleting...
+                            </div>
+                          ) : (
+                            'Delete Bovine'
+                          )}
+                        </button>
+                        <button
+                          onClick={() => {
+                            setShowDeleteConfirm(false);
+                            setDeleteConfirmText('');
+                            setError('');
+                          }}
+                          className="bg-gray-500 hover:bg-gray-600 text-white px-6 py-3 rounded-lg font-medium transition duration-200 transform hover:scale-105 shadow-lg"
+                        >
+                          Cancel
+                        </button>
+                      </div>
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
           </div>

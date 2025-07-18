@@ -67,6 +67,16 @@ export interface CreateBovineRequest {
   stableId: number;
 }
 
+export interface UpdateBovineRequest {
+  name: string;
+  gender: string;
+  birthDate: string;
+  breed: string;
+  location: string;
+  bovineImg?: File;
+  stableId: number;
+}
+
 export interface UpdateProfileRequest {
   username: string;
   email: string;
@@ -128,6 +138,32 @@ export const bovinesApi = {
 
   getBovineById: async (id: number): Promise<Bovine> => {
     const response = await api.get(`/bovines/${id}`);
+    return response.data;
+  },
+
+  updateBovine: async (id: number, data: UpdateBovineRequest): Promise<Bovine> => {
+    const formData = new FormData();
+    formData.append('Name', data.name);
+    formData.append('Gender', data.gender);
+    formData.append('BirthDate', data.birthDate);
+    formData.append('Breed', data.breed);
+    formData.append('Location', data.location);
+    formData.append('StableId', data.stableId.toString());
+    
+    if (data.bovineImg) {
+      formData.append('FileData', data.bovineImg);
+    }
+
+    const response = await api.put(`/bovines/${id}`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+    return response.data;
+  },
+
+  deleteBovine: async (id: number): Promise<void> => {
+    const response = await api.delete(`/bovines/${id}`);
     return response.data;
   },
 };
