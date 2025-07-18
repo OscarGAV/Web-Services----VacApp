@@ -19,15 +19,14 @@ const BovineDetails: React.FC = () => {
       
       try {
         setIsLoading(true);
-        // Since we don't have a single bovine endpoint, we'll get all and filter
-        const allBovines = await bovinesApi.getAllBovines();
-        const foundBovine = allBovines.find(b => b.id === parseInt(id));
-        
-        if (foundBovine) {
-          setBovine(foundBovine);
-        } else {
-          setError('Bovine not found');
+        const bovineId = parseInt(id);
+        if (isNaN(bovineId)) {
+          setError('Invalid bovine ID');
+          return;
         }
+
+        const bovineData = await bovinesApi.getBovineById(bovineId);
+        setBovine(bovineData);
       } catch (error: any) {
         setError(error.response?.data?.message || 'Failed to fetch bovine details');
       } finally {

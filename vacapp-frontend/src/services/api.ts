@@ -100,7 +100,7 @@ export const bovinesApi = {
     formData.append('StableId', data.stableId.toString());
     
     if (data.bovineImg) {
-      formData.append('BovineImg', data.bovineImg);
+      formData.append('FileData', data.bovineImg);
     }
 
     const response = await api.post('/bovines', formData, {
@@ -108,6 +108,11 @@ export const bovinesApi = {
         'Content-Type': 'multipart/form-data',
       },
     });
+    return response.data;
+  },
+
+  getBovineById: async (id: number): Promise<Bovine> => {
+    const response = await api.get(`/bovines/${id}`);
     return response.data;
   },
 };
