@@ -40,20 +40,13 @@ const Bovines: React.FC = () => {
     navigate('/bovines/add');
   };
 
-  const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString();
+  const handleViewDetails = (bovineId: number) => {
+    navigate(`/bovines/${bovineId}`);
   };
 
-  const calculateAge = (birthDate: string) => {
-    const birth = new Date(birthDate);
-    const today = new Date();
-    const age = today.getFullYear() - birth.getFullYear();
-    const monthDiff = today.getMonth() - birth.getMonth();
-    
-    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birth.getDate())) {
-      return age - 1;
-    }
-    return age;
+  const handleImageError = (e: React.SyntheticEvent<HTMLImageElement>) => {
+    e.currentTarget.style.display = 'none';
+    e.currentTarget.nextElementSibling?.classList.remove('hidden');
   };
 
   return (
@@ -163,32 +156,40 @@ const Bovines: React.FC = () => {
             {bovines.map((bovine) => (
               <div key={bovine.id} className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl border border-white/20 overflow-hidden hover:shadow-2xl transition duration-300 transform hover:scale-105">
                 {/* Bovine Image */}
-                <div className="h-48 bg-gradient-to-br from-green-100 to-emerald-100 flex items-center justify-center">
+                <div className="h-48 bg-gradient-to-br from-green-100 to-emerald-100 flex items-center justify-center relative">
                   {bovine.bovineImg ? (
-                    <img 
-                      src={bovine.bovineImg} 
-                      alt={bovine.name}
-                      className="h-full w-full object-cover"
-                    />
+                    <>
+                      <img 
+                        src={bovine.bovineImg} 
+                        alt={bovine.name}
+                        className="h-full w-full object-cover"
+                        onError={handleImageError}
+                      />
+                      <div className="hidden text-center">
+                        <svg className="h-16 w-16 text-green-600 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                        </svg>
+                        <p className="text-gray-600 text-sm">Image not available</p>
+                      </div>
+                    </>
                   ) : (
-                    <svg className="h-16 w-16 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                    </svg>
+                    <div className="text-center">
+                      <svg className="h-16 w-16 text-green-600 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                      </svg>
+                      <p className="text-gray-600 text-sm">No image</p>
+                    </div>
                   )}
                 </div>
                 
-                {/* Bovine Info */}
+                {/* Bovine Info - Simplified */}
                 <div className="p-6">
-                  <h3 className="text-xl font-bold text-gray-900 mb-2">{bovine.name}</h3>
+                  <h3 className="text-xl font-bold text-gray-900 mb-4">{bovine.name}</h3>
                   
-                  <div className="space-y-2 text-sm">
+                  <div className="space-y-3 text-sm">
                     <div className="flex justify-between">
                       <span className="text-gray-600">Gender:</span>
                       <span className="font-medium text-gray-900">{bovine.gender}</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-gray-600">Age:</span>
-                      <span className="font-medium text-gray-900">{calculateAge(bovine.birthDate)} years</span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-gray-600">Breed:</span>
@@ -202,14 +203,13 @@ const Bovines: React.FC = () => {
                       <span className="text-gray-600">Stable ID:</span>
                       <span className="font-medium text-gray-900">#{bovine.stableId}</span>
                     </div>
-                    <div className="flex justify-between">
-                      <span className="text-gray-600">Birth Date:</span>
-                      <span className="font-medium text-gray-900">{formatDate(bovine.birthDate)}</span>
-                    </div>
                   </div>
                   
-                  <div className="mt-4 pt-4 border-t border-gray-200">
-                    <button className="w-full bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white py-2 px-4 rounded-lg font-medium transition duration-200">
+                  <div className="mt-6 pt-4 border-t border-gray-200">
+                    <button 
+                      onClick={() => handleViewDetails(bovine.id)}
+                      className="w-full bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white py-2 px-4 rounded-lg font-medium transition duration-200 transform hover:scale-105"
+                    >
                       View Details
                     </button>
                   </div>

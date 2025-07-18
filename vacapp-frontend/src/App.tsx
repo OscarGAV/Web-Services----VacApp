@@ -6,6 +6,7 @@ import Register from './pages/Register';
 import Home from './pages/Home';
 import Bovines from './pages/Bovines';
 import AddBovine from './pages/AddBovine';
+import BovineDetails from './pages/BovineDetails';
 import './App.css';
 
 function App() {
@@ -37,6 +38,14 @@ function App() {
               element={
                 <ProtectedRoute>
                   <AddBovine />
+                </ProtectedRoute>
+              } 
+            />
+            <Route 
+              path="/bovines/:id" 
+              element={
+                <ProtectedRoute>
+                  <BovineDetails />
                 </ProtectedRoute>
               } 
             />
