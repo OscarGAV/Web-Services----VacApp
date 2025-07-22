@@ -1,11 +1,12 @@
 using VacApp_Bovinova_Platform.RanchManagement.Domain.Model.Commands;
+using VacApp_Bovinova_Platform.RanchManagement.Domain.Model.ValueObjects;
 using VacApp_Bovinova_Platform.RanchManagement.Interfaces.REST.Resources;
 
 namespace VacApp_Bovinova_Platform.RanchManagement.Interfaces.REST.Transform;
 
-public class CreateBovineCommandFromResourceAssembler
+public static class CreateBovineCommandFromResourceAssembler
 {
-    public static CreateBovineCommand ToCommandFromResource(CreateBovineResource resource)
+    public static CreateBovineCommand ToCommandFromResource(CreateBovineResource resource, int userId)
     {
         return new CreateBovineCommand(
             resource.Name,
@@ -13,7 +14,10 @@ public class CreateBovineCommandFromResourceAssembler
             resource.BirthDate,
             resource.Breed,
             resource.Location,
-            resource.BovineImg
+            string.Empty,
+            resource.StableId,
+            new RanchUserId(userId),
+            resource.FileData?.OpenReadStream() ?? null
         );
     }
 }

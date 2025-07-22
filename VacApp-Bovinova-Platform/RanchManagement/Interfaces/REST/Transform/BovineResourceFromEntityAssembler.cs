@@ -13,7 +13,8 @@ public static class BovineResourceFromEntityAssembler
             entity.BirthDate,
             entity.Breed,
             entity.Location,
-            entity.BovineImg
+            entity.BovineImg,
+            entity.StableId
         );
     }
 }

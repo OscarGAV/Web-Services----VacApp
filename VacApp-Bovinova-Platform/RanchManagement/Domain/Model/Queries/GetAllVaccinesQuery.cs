@@ -1,3 +1,3 @@
 namespace VacApp_Bovinova_Platform.RanchManagement.Domain.Model.Queries;
 
-public record GetAllVaccinesQuery();
+public record GetAllVaccinesQuery(int UserId);
