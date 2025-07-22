@@ -1,7 +1,7 @@
-using VacApp_Bovinova_Platform.IAM.Domain.Model.Commands;
+using VacApp_Bovinova_Platform.IAM.Domain.Model.Commands.AdminCommands;
 using VacApp_Bovinova_Platform.IAM.Interfaces.REST.Resources.AdminResources;
 
-namespace VacApp_Bovinova_Platform.IAM.Interfaces.REST.Transform;
+namespace VacApp_Bovinova_Platform.IAM.Interfaces.REST.Transform.TransformFromAdminResources;
 
 public static class CreateAdminCommandFromResourceAssembler
 {

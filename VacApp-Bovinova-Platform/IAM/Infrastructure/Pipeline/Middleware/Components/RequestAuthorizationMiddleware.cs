@@ -1,5 +1,6 @@
 using VacApp_Bovinova_Platform.IAM.Application.OutBoundServices;
 using VacApp_Bovinova_Platform.IAM.Domain.Model.Queries;
+using VacApp_Bovinova_Platform.IAM.Domain.Model.Queries.UserQueries;
 using VacApp_Bovinova_Platform.IAM.Domain.Services;
 using VacApp_Bovinova_Platform.IAM.Infrastructure.Pipeline.Middleware.Attributes;
 

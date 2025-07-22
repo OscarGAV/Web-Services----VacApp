@@ -1,4 +1,4 @@
-namespace VacApp_Bovinova_Platform.IAM.Domain.Model.Commands
+namespace VacApp_Bovinova_Platform.IAM.Domain.Model.Commands.UserCommands
 {
     public record SignUpCommand(
         string Username,

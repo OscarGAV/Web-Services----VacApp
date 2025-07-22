@@ -1,4 +1,5 @@
 using VacApp_Bovinova_Platform.IAM.Domain.Model.Commands;
+using VacApp_Bovinova_Platform.IAM.Domain.Model.Commands.AdminCommands;
 
 namespace VacApp_Bovinova_Platform.IAM.Domain.Services;
 

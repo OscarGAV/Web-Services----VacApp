@@ -4,10 +4,13 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 using VacApp_Bovinova_Platform.IAM.Domain.Model.Queries;
+using VacApp_Bovinova_Platform.IAM.Domain.Model.Queries.AdminQueries;
+using VacApp_Bovinova_Platform.IAM.Domain.Model.Queries.UserQueries;
 using VacApp_Bovinova_Platform.IAM.Domain.Services;
 using VacApp_Bovinova_Platform.IAM.Infrastructure.Pipeline.Middleware.Attributes;
 using VacApp_Bovinova_Platform.IAM.Interfaces.REST.Resources.AdminResources;
 using VacApp_Bovinova_Platform.IAM.Interfaces.REST.Transform;
+using VacApp_Bovinova_Platform.IAM.Interfaces.REST.Transform.TransformFromAdminResources;
 
 namespace VacApp_Bovinova_Platform.IAM.Interfaces.REST
 {

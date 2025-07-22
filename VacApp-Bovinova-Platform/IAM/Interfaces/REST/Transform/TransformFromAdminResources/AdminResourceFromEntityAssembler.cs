@@ -1,6 +1,6 @@
 using VacApp_Bovinova_Platform.IAM.Interfaces.REST.Resources.AdminResources;
 
-namespace VacApp_Bovinova_Platform.IAM.Interfaces.REST.Transform;
+namespace VacApp_Bovinova_Platform.IAM.Interfaces.REST.Transform.TransformFromAdminResources;
 
 public static class AdminResourceFromEntityAssembler
 {

@@ -1,5 +1,6 @@
 using VacApp_Bovinova_Platform.IAM.Domain.Model.Aggregates;
 using VacApp_Bovinova_Platform.IAM.Domain.Model.Queries;
+using VacApp_Bovinova_Platform.IAM.Domain.Model.Queries.AdminQueries;
 
 namespace VacApp_Bovinova_Platform.IAM.Domain.Services;
 

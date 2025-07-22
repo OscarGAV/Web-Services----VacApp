@@ -1,8 +1,6 @@
-using VacApp_Bovinova_Platform.IAM.Domain.Model.Aggregates;
-using VacApp_Bovinova_Platform.IAM.Interfaces.REST.Resources;
 using VacApp_Bovinova_Platform.IAM.Interfaces.REST.Resources.UserResources;
 
-namespace VacApp_Bovinova_Platform.IAM.Interfaces.REST.Transform
+namespace VacApp_Bovinova_Platform.IAM.Interfaces.REST.Transform.TransformFromUserResources
 {
     public static class UserResourceFromEntityAssembler
     {

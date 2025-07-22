@@ -2,6 +2,8 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using EntityFrameworkCore.CreatedUpdatedDate.Contracts;
 using VacApp_Bovinova_Platform.IAM.Domain.Model.Commands;
+using VacApp_Bovinova_Platform.IAM.Domain.Model.Commands.UserCommands;
+
 namespace VacApp_Bovinova_Platform.IAM.Domain.Model.Aggregates
 {
     public class User : IEntityWithCreatedUpdatedDate

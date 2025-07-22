@@ -1,6 +1,7 @@
 using VacApp_Bovinova_Platform.IAM.Application.OutBoundServices;
 using VacApp_Bovinova_Platform.IAM.Domain.Model.Aggregates;
 using VacApp_Bovinova_Platform.IAM.Domain.Model.Commands;
+using VacApp_Bovinova_Platform.IAM.Domain.Model.Commands.UserCommands;
 using VacApp_Bovinova_Platform.IAM.Domain.Repositories;
 using VacApp_Bovinova_Platform.IAM.Domain.Services;
 using VacApp_Bovinova_Platform.Shared.Domain.Repositories;

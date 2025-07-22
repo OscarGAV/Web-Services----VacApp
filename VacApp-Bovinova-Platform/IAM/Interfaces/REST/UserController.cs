@@ -13,6 +13,8 @@ using VacApp_Bovinova_Platform.RanchManagement.Domain.Model.Queries;
 using VacApp_Bovinova_Platform.RanchManagement.Domain.Model.ValueObjects;
 using VacApp_Bovinova_Platform.RanchManagement.Domain.Services;
 using Microsoft.AspNetCore.Authorization;
+using VacApp_Bovinova_Platform.IAM.Domain.Model.Queries.UserQueries;
+using VacApp_Bovinova_Platform.IAM.Interfaces.REST.Transform.TransformFromUserResources;
 
 namespace VacApp_Bovinova_Platform.IAM.Interfaces.REST
 {
